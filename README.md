@@ -1,23 +1,9 @@
 
-**Case study**
+## Case study
 [Website]()
 
-## List all hosts targeted
-[servers]
-server1 ansible_host=10.0.2.15
 
-## provid the passwords
-[all:vars]
-ansible_python_interpreter=/usr/bin/python3
-ansible_user=pass
-ansible_password=pass
-ansible_become_pass=pass
-
-
-
-
-
-**Overview**
+## Overview
 
 
 **Initials configuration**
@@ -40,13 +26,15 @@ ansible_become_pass=pass
 
 
 
-**How to run**
+## How to run
+
  open your temrminal type > ansible-playbook role-server.yml
 
 
-**Tech Stack**
+## Tech Stack
+
+## Todo
 
 
-**API**
 
 
