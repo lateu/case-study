@@ -1,0 +1,41 @@
+---
+# tasks file for maven-setup-role
+
+- name: add apt respository
+  ansible.builtin.apt_repository: 
+    repo: "ppa:webupd8team/java"
+    state: present
+
+- name: Update Repository
+  command: apt update
+
+- name: Installing java 
+  yum:
+   name: default-jdk
+   state: present
+
+- name: Downloading Maven
+  get_url: 
+    url: https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
+    dest: /home/rlateu/Downloads
+
+- name: Extracting Maven
+  unarchive: 
+    src: "/home/rlateu/Downloads/apache-maven-3.8.6-bin.tar.gz"
+    dest: "/home/rlateu/Downloads"
+    remote_src: yes
+
+- name: moving maven to /opt folder maven
+  command: mv /home/rlateu/Downloads/apache-maven-3.8.6 /opt
+
+- name: update maven
+  alternatives:
+    name: maven
+    link: /usr/bin/mvn
+    path: /opt/apache-maven-3.8.6/bin/mvn 
+
+ 
+
+  
+
+

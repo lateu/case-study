@@ -1,0 +1,6 @@
+---
+- hosts: all
+  become: yes
+  roles:
+    - role: maven-setup-role 
+    - role: apache-tomcat-setup-role

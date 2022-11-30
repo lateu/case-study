@@ -1,0 +1,40 @@
+---
+# tasks file for apache-tomcat-setup-role
+
+#- name: Update repo
+#  command: apt-get update
+     
+- name: Installing java
+  yum :
+    name: default-jdk
+    state: present
+
+#- name: Adding group tomcat
+#  command: groupadd tomcat
+
+#- name: Adding user
+#  command: useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat 
+
+- name: Downloading required tomcat
+  get_url: 
+    url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.69/bin/apache-tomcat-9.0.69.tar.gz
+    dest: /opt
+
+- name: Extracting Downloaded tomcat
+  unarchive: 
+    src: /opt/apache-tomcat-9.0.69.tar.gz
+    dest: /opt
+    remote_src: yes
+
+- name: Renaming tomcat home
+  command: mv /opt/apache-tomcat-9.0.69 /opt/tomcat
+
+- name: Giving group access to tomcat
+  command: chgrp -R tomcat /opt/tomcat
+  command: chmod -R g+r /opt/tomcat/conf
+  command: chmod g+x /opt/tomcat/conf
+
+- name: Giving access to web, work, logs directories
+  command: chown -R tomcat /opt/tomcat/webapps/ /opt/tomcat/work/ /opt/tomcat/temp/ /opt/tomcat/logs/
+ 
+
